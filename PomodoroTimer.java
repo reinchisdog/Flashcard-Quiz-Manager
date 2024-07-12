@@ -93,9 +93,9 @@ public class PomodoroTimer {
         isWorkTime = true;
         isRunning = true;
         isPaused = false;
-        btnPausePlay.setText("Pause");
+        btnPausePlay.setText("P A U S E");
         btnPausePlay.setVisible(true);
-        btnStart.setText("Restart");
+        btnStart.setText("R E S T A R T");
 
         int workHours = Integer.parseInt(workHourField.getText());
         int workMinutes = Integer.parseInt(workMinuteField.getText());
@@ -110,9 +110,9 @@ public class PomodoroTimer {
         isWorkTime = false;
         isRunning = true;
         isPaused = false;
-        btnPausePlay.setText("Pause");
+        btnPausePlay.setText("P A U S E");
         btnPausePlay.setVisible(true);
-        btnStart.setText("Restart");
+        btnStart.setText("R E S T A R T");
 
         int breakHours = Integer.parseInt(breakHourField.getText());
         int breakMinutes = Integer.parseInt(breakMinuteField.getText());
@@ -158,7 +158,7 @@ public class PomodoroTimer {
             return;
         }
         isPaused = true;
-        btnPausePlay.setText("Resume");
+        btnPausePlay.setText("R E S U M E");
         timer.cancel();
     }
 
@@ -167,7 +167,7 @@ public class PomodoroTimer {
             return;
         }
         isPaused = false;
-        btnPausePlay.setText("Pause");
+        btnPausePlay.setText("P A U S E");
 
         startTimerTask();
     }
@@ -179,9 +179,9 @@ public class PomodoroTimer {
         isRunning = false;
         isPaused = false;
         isWorkTime = true;
-        btnPausePlay.setText("Pause");
+        btnPausePlay.setText("P A U S E");
         btnPausePlay.setVisible(false);
-        btnStart.setText("Start");
+        btnStart.setText("S T A R T");
         enableTextFields();
         int workHours = Integer.parseInt(workHourField.getText());
         int workMinutes = Integer.parseInt(workMinuteField.getText());

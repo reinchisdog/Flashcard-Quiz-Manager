@@ -1,5 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +38,11 @@ public class FlashcardGUI extends JFrame{
     private final JTextField breakSecondField;
     private final JButton btnStart;
 
+    private final Color blue1 = new Color(163,201,218);
+    private final Color white1 = new Color(229,232,234);
+    private final Color black1 = new Color(45,42,44);
+    private final Color black2 = new Color(91,91,91);
+
 
     //Method that disables some GUI components when there is no file opened
     private void FlashcardClose(){
@@ -62,6 +69,7 @@ public class FlashcardGUI extends JFrame{
         btnStart.setEnabled(false);
         btnState.setEnabled(false);
     }
+
 
     //Method the enables some GUI components when a file is opened
     private void FlashcardOpen(){
@@ -164,6 +172,7 @@ public class FlashcardGUI extends JFrame{
         GridBagLayout op_layout, p1_layout, p2_layout;
 
         out_panel = new JPanel();
+        out_panel.setBackground(white1);
         op_layout = new GridBagLayout();
         op_layout.columnWidths = new int[]{854, 426};
         out_panel.setLayout(op_layout);
@@ -172,7 +181,7 @@ public class FlashcardGUI extends JFrame{
 
         //Panel 1 (Left Section of the System) -------------------------------------------------------------------------
         p1 = new JPanel();
-        p1.setBackground(new Color(232, 232, 232));
+        p1.setBackground(null);
 
             //Panel 1 Layout
         p1_layout = new GridBagLayout();
@@ -186,6 +195,9 @@ public class FlashcardGUI extends JFrame{
             //Panel 1 Items
                 //P1 - Button for Traversing to Left
         JButton btnArrowLeft = new JButton("<");
+        btnArrowLeft.setBackground(black1);
+        btnArrowLeft.setForeground(Color.WHITE);
+        btnArrowLeft.setBackground(new Color(45,42,44));
         btnArrowLeft.setMargin(new Insets(0, 5, 0, 5));
         gbc_p1.fill = GridBagConstraints.VERTICAL;
         gbc_p1.anchor = GridBagConstraints.EAST;
@@ -195,6 +207,8 @@ public class FlashcardGUI extends JFrame{
 
                 //P1 - Button for Traversing to Right
         JButton btnArrowRight = new JButton(">");
+        btnArrowRight.setBackground(black1);
+        btnArrowRight.setForeground(Color.WHITE);
         btnArrowRight.setMargin(new Insets(0, 5, 0, 5));
         gbc_p1.fill = GridBagConstraints.VERTICAL;
         gbc_p1.anchor = GridBagConstraints.WEST;
@@ -223,7 +237,7 @@ public class FlashcardGUI extends JFrame{
 
         //Panel 2 (Right Section of the System) ------------------------------------------------------------------------
         JPanel p2 = new JPanel();
-        p2.setBackground(new Color(191, 191, 191));
+        p2.setBackground(blue1);
         gbc_op.fill = GridBagConstraints.BOTH;
         gbc_op.gridx = 1;
         gbc_op.weighty = 1.0;
@@ -247,7 +261,7 @@ public class FlashcardGUI extends JFrame{
                 //P2 - Label for File Name
         lblFileName = new JLabel();
         lblFileName.setText("\u200E");
-        lblFileName.setFont(new Font("Helvetica", Font.BOLD, 18));
+        lblFileName.setFont(new Font("Helvetica", Font.BOLD, 20));
         lblFileName.setHorizontalAlignment(SwingConstants.CENTER);
         lblFileName.setVerticalAlignment(SwingConstants.CENTER);
         gbc_p2.fill = GridBagConstraints.HORIZONTAL;
@@ -267,6 +281,10 @@ public class FlashcardGUI extends JFrame{
         btnInsert = new JButton("I N S E R T");
         btnUpdate = new JButton("U P D A T E");
         btnDelete = new JButton("D E L E T E");
+
+        btnInsert.setBackground(white1);
+        btnUpdate.setBackground(white1);
+        btnDelete.setBackground(white1);
 
         pnlFcOptions.add(btnInsert);
         pnlFcOptions.add(btnUpdate);
@@ -292,7 +310,7 @@ public class FlashcardGUI extends JFrame{
         gbc_p2.gridwidth = 3;
 
         btnQuiz = new JButton("G E N E R A T E   Q U I Z");
-        btnQuiz.setBackground(new Color(73, 73, 73));
+        btnQuiz.setBackground(black2);
         btnQuiz.setForeground(new Color(255, 255, 255));
 
         pnlQzOptions.add(btnQuiz);
@@ -323,6 +341,7 @@ public class FlashcardGUI extends JFrame{
         JLabel lblTimer = new JLabel("00:25:00", SwingConstants.CENTER);
         lblTimer.setFont(new Font("Helvetica", Font.PLAIN, 32));
         lblTimer.setBackground(null);
+        lblTimer.setForeground(white1);
         lblTimer.setOpaque(true);
         lblTimer.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
@@ -334,29 +353,41 @@ public class FlashcardGUI extends JFrame{
         breakMinuteField = new JTextField("05", 2);
         breakSecondField = new JTextField("00", 2);
 
-        btnStart = new JButton("Start");
+        btnStart = new JButton("S T A R T");
+        btnStart.setBackground(white1);
         btnStart.setEnabled(false);
 
-        JButton btnPausePlay = new JButton("Pause");
+        JButton btnPausePlay = new JButton("P A U S E");
+        btnPausePlay.setBackground(white1);
         btnPausePlay.setVisible(false);
 
         JPanel timerPanel = new JPanel();
         timerPanel.add(lblTimer);
-        gbc_pt.anchor = GridBagConstraints.NORTH;
+        timerPanel.setBackground(black1);
+        gbc_pt.anchor = GridBagConstraints.CENTER;
         gbc_pt.fill = GridBagConstraints.HORIZONTAL;
-        gbc_pt.weightx = 1.0;
+        gbc_pt.weighty = 1.0;
         gbc_pt.gridx = 0;
         gbc_pt.gridy = 0;
         gbc_pt.gridwidth = 2;
         pnlTmOptions.add(timerPanel, gbc_pt);
 
+        JPanel workEntry = new JPanel();
+        workEntry.add(workHourField);
+        workHourField.setBorder(null);
+        workEntry.add(new JLabel(":"));
+        workEntry.add(workMinuteField);
+        workMinuteField.setBorder(null);
+        workEntry.add(new JLabel(":"));
+        workEntry.add(workSecondField);
+        workSecondField.setBorder(null);
+        workEntry.setBackground(Color.WHITE);
+        workEntry.setPreferredSize(new Dimension(100, 23));
+        workEntry.setBorder(new EtchedBorder());
+
         JPanel workTimePanel = new JPanel();
-        workTimePanel.add(new JLabel("Work Time:"));
-        workTimePanel.add(workHourField);
-        workTimePanel.add(new JLabel(":"));
-        workTimePanel.add(workMinuteField);
-        workTimePanel.add(new JLabel(":"));
-        workTimePanel.add(workSecondField);
+        workTimePanel.add(new JLabel(" Work Time:"));
+        workTimePanel.add(workEntry);
         workTimePanel.setBackground(null);
         gbc_pt.anchor = GridBagConstraints.CENTER;
         gbc_pt.fill = GridBagConstraints.HORIZONTAL;
@@ -366,13 +397,22 @@ public class FlashcardGUI extends JFrame{
         gbc_pt.gridwidth = 2;
         pnlTmOptions.add(workTimePanel, gbc_pt);
 
+        JPanel breakEntry = new JPanel();
+        breakEntry.add(breakHourField);
+        breakHourField.setBorder(null);
+        breakEntry.add(new JLabel(":"));
+        breakEntry.add(breakMinuteField);
+        breakMinuteField.setBorder(null);
+        breakEntry.add(new JLabel(":"));
+        breakEntry.add(breakSecondField);
+        breakSecondField.setBorder(null);
+        breakEntry.setBackground(Color.WHITE);
+        breakEntry.setPreferredSize(new Dimension(100, 23));
+        breakEntry.setBorder(new EtchedBorder());
+
         JPanel breakTimePanel = new JPanel();
         breakTimePanel.add(new JLabel("Break Time:"));
-        breakTimePanel.add(breakHourField);
-        breakTimePanel.add(new JLabel(":"));
-        breakTimePanel.add(breakMinuteField);
-        breakTimePanel.add(new JLabel(":"));
-        breakTimePanel.add(breakSecondField);
+        breakTimePanel.add(breakEntry);
         breakTimePanel.setBackground(null);
         gbc_pt.anchor = GridBagConstraints.CENTER;
         gbc_pt.fill = GridBagConstraints.HORIZONTAL;
@@ -381,7 +421,6 @@ public class FlashcardGUI extends JFrame{
         gbc_pt.gridy = 2;
         gbc_pt.gridwidth = 2;
         pnlTmOptions.add(breakTimePanel, gbc_pt);
-
         gbc_pt.anchor = GridBagConstraints.CENTER;
         gbc_pt.fill = GridBagConstraints.BOTH;
         gbc_pt.weightx = 1.0;
@@ -406,6 +445,7 @@ public class FlashcardGUI extends JFrame{
                 panelTitleFont,
                 Color.BLACK);
         pnlTmOptions.setBorder(tbTmOptions);
+        pnlTmOptions.setBackground(white1);
         p2.add(pnlTmOptions, gbc_p2);
 
         PomodoroTimer pt = new PomodoroTimer(lblTimer, workHourField, workMinuteField, workSecondField,
@@ -422,6 +462,8 @@ public class FlashcardGUI extends JFrame{
 
                     //P2 - Label for Question or Answer Flashcard
         btnState = new JButton(" \u200E ");
+        btnState.setBackground(black2);
+        btnState.setForeground(Color.WHITE);
         pnlStateNav.add(btnState);
 
                     //P2 - Label for the Page Navigation of Flashcard
@@ -440,6 +482,7 @@ public class FlashcardGUI extends JFrame{
                 Color.BLACK
                 );
         pnlStateNav.setBorder(tbNvOptions);
+        pnlStateNav.setBackground(white1);
         p2.add(pnlStateNav, gbc_p2);
 
         btnInsert.setEnabled(false);
@@ -727,8 +770,8 @@ public class FlashcardGUI extends JFrame{
                     fcText.setText("<html><div style='text-align: center;'>" + fh.getContent() + "</div></html>");
                     lblItems.setText((fh.getCurrent() + 1) + " / " + (fh.countFile() / 2));
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException a) {
+                throw new RuntimeException(a);
             }
         });
 

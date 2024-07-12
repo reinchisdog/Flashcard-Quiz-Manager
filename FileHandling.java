@@ -111,12 +111,14 @@ public class FileHandling {
         }
     }
 
-    // Method for a save warning message before performing the next action ---------------------------------------------
+    //Method for a save warning message before performing the next action ---------------------------------------------
     int savePopup() {
         final int[] result = {0};
 
         JDialog saveDialog = new JDialog((Frame) null);
         saveDialog.setLayout(new BorderLayout());
+        saveDialog.getContentPane().setBackground(new Color(163, 201, 218)); // Set background color
+
         JLabel lblQuestion;
         JPanel panelQA, panelBtn;
         JButton btnSaveAs, btnDontSaveAs, btnSvCancel;
@@ -133,32 +135,47 @@ public class FileHandling {
         lblQuestion.setHorizontalAlignment(SwingConstants.CENTER);
         panelQA.add(lblQuestion, BorderLayout.CENTER);
 
-        panelBtn = new JPanel(new FlowLayout());
+        panelBtn = new JPanel(new GridBagLayout());
         saveDialog.add(panelBtn, BorderLayout.SOUTH);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        btnSaveAs = new JButton("Save");
-        btnSaveAs.setSize(25, 30);
-        panelBtn.add(btnSaveAs);
-
-        btnDontSaveAs = new JButton("Don't Save");
-        btnDontSaveAs.setSize(25, 30);
-        panelBtn.add(btnDontSaveAs);
-
+        // Cancel Button (leftmost)
+        gbc.gridx = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
         btnSvCancel = new JButton("Cancel");
-        btnSvCancel.setSize(25, 30);
-        panelBtn.add(btnSvCancel);
+        panelBtn.add(btnSvCancel, gbc);
 
-        btnSaveAs.addActionListener(_ -> {
+        // Space between buttons
+        gbc.insets = new Insets(0, 10, 0, 0); // Space to the left of buttons
+
+        // Save Button (rightmost)
+        gbc.gridx = 1;
+        gbc.weightx = 0.0;
+        gbc.anchor = GridBagConstraints.EAST;
+        btnSaveAs = new JButton("Save");
+        panelBtn.add(btnSaveAs, gbc);
+
+        // Don't Save Button (rightmost)
+        gbc.gridx = 2;
+        gbc.weightx = 0.0;
+        btnDontSaveAs = new JButton("Don't Save");
+        panelBtn.add(btnDontSaveAs, gbc);
+
+        // Add padding to the button panel
+        panelBtn.setBorder(new EmptyBorder(10, 10, 10, 10)); // Add space around the buttons
+
+        btnSaveAs.addActionListener(e -> {
             result[0] = 1;
             saveDialog.dispose();
         });
 
-        btnDontSaveAs.addActionListener(_ -> {
+        btnDontSaveAs.addActionListener(e -> {
             result[0] = 2;
             saveDialog.dispose();
         });
 
-        btnSvCancel.addActionListener(_ -> saveDialog.dispose());
+        btnSvCancel.addActionListener(e -> saveDialog.dispose());
 
         saveDialog.setSize(420, 184);
         saveDialog.setResizable(false);

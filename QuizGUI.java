@@ -44,7 +44,7 @@ class Questions {
     }
 }
 
-public class QuizGUI{
+public class QuizGUI {
     private ArrayList<Question> questions;
     private int currentQuestionIndex;
     private JDialog quizDialog;
@@ -60,6 +60,7 @@ public class QuizGUI{
         quizDialog.setSize(400, 200);
         quizDialog.setResizable(false);
         quizDialog.setLayout(new GridBagLayout());
+        quizDialog.getContentPane().setBackground(new Color(229, 232, 234));
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -67,6 +68,7 @@ public class QuizGUI{
 
         // Panel for the question label (now using JTextArea)
         JPanel questionPanel = new JPanel(new BorderLayout());
+        questionPanel.setBackground(new Color(229, 232, 234));
         questionTextArea = new JTextArea("Question");
         questionTextArea.setLineWrap(true);
         questionTextArea.setWrapStyleWord(true);
@@ -84,7 +86,9 @@ public class QuizGUI{
 
         // Panel for the answer field
         JPanel answerPanel = new JPanel(new BorderLayout());
+        answerPanel.setBackground(new Color(229, 232, 234));
         answerField = new JTextField();
+        answerField.setFont(new Font("Helvetica", Font.PLAIN, 14));
         answerField.setPreferredSize(new Dimension(200, 30));
         answerPanel.add(answerField, BorderLayout.CENTER);
         gbc.gridx = 0;
@@ -96,8 +100,11 @@ public class QuizGUI{
 
         // Panel for the next button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        nextButton = new JButton("Next");
+        buttonPanel.setBackground(new Color(229, 232, 234));
+        nextButton = new JButton("NEXT");
         nextButton.setPreferredSize(new Dimension(100, 30));
+        nextButton.setBackground(new Color(27, 29, 31));
+        nextButton.setForeground(Color.WHITE);
         nextButton.addActionListener(_ -> {
             checkAnswer();
             currentQuestionIndex++;
